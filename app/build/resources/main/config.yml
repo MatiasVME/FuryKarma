@@ -1,0 +1,51 @@
+# FuryKarma Configuration
+
+# Cooldown in hours between giving karma.
+# By default, a player can give karma every 12 hours.
+cooldown-hours: 12
+
+# Configuration of all in-game messages.
+# You can use standard Bukkit color codes (e.g., &a, &c, &e) or MiniMessage tags (e.g., <green>, <red>, <gold>).
+messages:
+  prefix: "&e[&bFuryKarma&e] &r"
+  no-permission: "&cYou do not have permission to execute this command."
+  only-players: "&cOnly players can execute this command. Use /karma info <player> from the console."
+  player-not-found: "&cPlayer &e%player% &chas never played on this server."
+  cooldown: "&cYou must wait &e%time% &cbefore you can give karma again."
+  cannot-self-karma: "&cYou cannot give karma to yourself!"
+  karma-given-sender: "&aYou have given a &e%type% &akarma to &b%player% &afor: &7%reason%"
+  karma-received-target: "&aYou have received a &e%type% &akarma from &b%player% &afor: &7%reason%"
+  invalid-karma-type: "&cInvalid karma type! Use &e/karma <positive|negative> <player> <reason>&c."
+  not-authenticated: "&cYou must login before using karma commands."
+  config-reloaded: "&aConfiguration reloaded successfully."
+  missing-arguments: "&cUsage: &e/karma <positive|negative> <player> <reason>"
+  missing-reason: "&cYou must provide a reason for giving karma."
+  positive-label: "&a&lPOSITIVE"
+  negative-label: "&c&lNEGATIVE"
+
+  # Help command formatting
+  help:
+    header: "&e&m-------&r &b&lFuryKarma Help &e&m-------"
+    give: " &e/karma <positive | negative> <player> <reason> &7- Give karma to a player"
+    info-self: " &e/karma info &7- Show your karma information"
+    info-other: " &e/karma info <player> &7- Show another player's karma"
+    info-top: " &e/karma top &7- Show the top 10 karma leaderboard"
+    info-help: " &e/karma help &7- Show this help menu"
+    footer: "&e&m----------------------------"
+
+  # Info command formatting
+  info:
+    header: "&e&m-------&r &b&lKarma Info: &e%player% &e&m-------"
+    total: "&7Total Karma (Net): &6%total%"
+    average: "&7Average Rating: &b%average% &8(&a+%positives% &7/ &c-%negatives%&8)"
+    no-logs: "&7No karma records received yet."
+    logs-header: "&eRecent received ratings:"
+    log-entry: " &8- %type% &7by &b%sender% &8(&e%time% ago&8): &7%reason%"
+    footer: "&e&m----------------------------"
+
+  # Top command formatting
+  top:
+    header: "&e&m-------&r &b&lTop 10 Karma Leaderboard &e&m-------"
+    entry: "&e%index%. &b%player% &7- Average: &b%average% &8(&6Net: %net%&8, &a+%positives%&7/&c-%negatives%&8)"
+    no-data: "&7No karma data recorded yet."
+    footer: "&e&m---------------------------------------"

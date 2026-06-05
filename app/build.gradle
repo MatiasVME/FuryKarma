@@ -1,0 +1,46 @@
+/*
+ * Gradle build configuration for the FuryKarma app subproject.
+ */
+
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'papermc'
+        url = uri('https://repo.papermc.io/repository/maven-public/')
+    }
+    maven {
+        name = 'nickuc'
+        url = uri('https://repo.nickuc.com/maven-releases/')
+    }
+}
+
+dependencies {
+    // PaperMC API
+    compileOnly 'io.papermc.paper:paper-api:26.1.2.build.+'
+
+    // nLogin API for cracked server compatibility
+    compileOnly 'com.nickuc.login:api:10.4'
+
+    // JUnit Jupiter for testing
+    testImplementation libs.junit.jupiter
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
+}
+
+tasks.named('jar') {
+    archiveFileName = 'FuryKarma.jar'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

@@ -1,0 +1,19 @@
+name: FuryKarma
+version: '1.0.0'
+main: furykarma.FuryKarma
+api-version: '1.21'
+description: A Paper plugin to manage player karma with SQLite database and nLogin compatibility.
+authors: [ MatiasVme ]
+permissions:
+  furykarma.use:
+    description: Allows using basic karma commands (info, top, help).
+    default: true
+  furykarma.give:
+    description: Allows giving karma to another player.
+    default: true
+  furykarma.bypass.cooldown:
+    description: Allows bypassing the cooldown for giving karma.
+    default: op
+  furykarma.admin:
+    description: Allows reloading the plugin configuration.
+    default: op

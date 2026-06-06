@@ -1,5 +1,5 @@
 name: FuryKarma
-version: '1.0.0'
+version: '1.0.1'
 main: furykarma.FuryKarma
 api-version: '1.21'
 description: A Paper plugin to manage player karma with SQLite database and nLogin compatibility.

@@ -10,7 +10,7 @@ It supports both cracked (offline-mode) and normal (online-mode) servers, integr
 
 ## Features
 
-- **Karma Voting**: Let players rate others using `/karma <positive|negative> <player> <reason>`.
+- **Karma Voting**: Let players rate others using `/karma <positive | negative> <player> <reason>`.
 - **Comprehensive Profile Info**: Players can query profiles (with `/karma info`) to view net karma, average positive rating, and a history of recent received ratings (relative timestamps included, e.g., `2h ago`).
 - **Leaderboard (Top 10)**: Displays the top 10 players sorted by their positive average rating, including positive/negative counts.
 - **Embedded SQLite Storage**: Efficient database queries for counts and leaderboard without bloat.

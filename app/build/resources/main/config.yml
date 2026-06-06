@@ -18,7 +18,7 @@ messages:
   invalid-karma-type: "&cInvalid karma type! Use &e/karma <positive|negative> <player> <reason>&c."
   not-authenticated: "&cYou must login before using karma commands."
   config-reloaded: "&aConfiguration reloaded successfully."
-  missing-arguments: "&cUsage: &e/karma <positive|negative> <player> <reason>"
+  missing-arguments: "&cUsage: &e/karma <positive | negative> <player> <reason>"
   missing-reason: "&cYou must provide a reason for giving karma."
   positive-label: "&a&lPOSITIVE"
   negative-label: "&c&lNEGATIVE"

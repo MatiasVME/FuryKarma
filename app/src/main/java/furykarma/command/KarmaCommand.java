@@ -163,7 +163,8 @@ public final class KarmaCommand implements BasicCommand {
     }
 
     private void handleInfo(CommandSender sender, String[] args) {
-        OfflinePlayer target;
+        UUID targetUuid;
+        String targetName;
         boolean self = false;
 
         if (args.length == 1) {
@@ -172,21 +173,38 @@ public final class KarmaCommand implements BasicCommand {
                 sendMessage(sender, "messages.only-players");
                 return;
             }
-            target = player;
+            targetUuid = player.getUniqueId();
+            targetName = player.getName();
             self = true;
         } else {
             // Other player info
-            String targetName = args[1];
-            target = getOfflinePlayer(targetName);
-            if (target == null || (!target.hasPlayedBefore() && !target.isOnline())) {
-                String msg = getMsg("messages.player-not-found").replace("%player%", targetName);
-                sender.sendMessage(MessageUtils.format(msg));
-                return;
+            String inputName = args[1];
+
+            // 1. Try online players first
+            Player online = Bukkit.getPlayer(inputName);
+            if (online != null) {
+                targetUuid = online.getUniqueId();
+                targetName = online.getName();
+            } else {
+                // 2. Try Bukkit offline player cache (vanilla / premium servers)
+                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(inputName);
+                if (offlinePlayer.hasPlayedBefore()) {
+                    targetUuid = offlinePlayer.getUniqueId();
+                    targetName = offlinePlayer.getName() != null ? offlinePlayer.getName() : inputName;
+                } else {
+                    // 3. Fallback: look up in the database by name (cracked / offline players)
+                    String[] dbInfo = plugin.getDatabaseManager().getPlayerInfoByName(inputName);
+                    if (dbInfo != null) {
+                        targetUuid = UUID.fromString(dbInfo[0]);
+                        targetName = dbInfo[1];
+                    } else {
+                        String msg = getMsg("messages.player-not-found").replace("%player%", inputName);
+                        sender.sendMessage(MessageUtils.format(msg));
+                        return;
+                    }
+                }
             }
         }
-
-        UUID targetUuid = target.getUniqueId();
-        String targetName = target.getName() != null ? target.getName() : args[1];
 
         // Fetch statistics from Database
         int pos = plugin.getDatabaseManager().getKarmaCount(targetUuid, "POSITIVE");

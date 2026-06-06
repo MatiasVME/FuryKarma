@@ -174,6 +174,26 @@ public final class DatabaseManager {
     }
 
     /**
+     * Looks up a player's UUID and latest known name from the database by name (case-insensitive).
+     * Returns null if not found.
+     */
+    public String[] getPlayerInfoByName(String name) {
+        String sql = "SELECT target_uuid, target_name FROM karma_logs WHERE LOWER(target_name) = LOWER(?) ORDER BY timestamp DESC LIMIT 1;";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return new String[]{ rs.getString("target_uuid"), rs.getString("target_name") };
+                }
+            }
+        } catch (SQLException e) {
+            plugin.getLogger().severe("Failed to look up player by name: " + name);
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * Retrieves the top players ordered by average karma.
      * Orders by average (positive / total) DESC, and then by total ratings DESC.
      */
